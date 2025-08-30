@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Landing Page</title>
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #f3f4f6;
+            overflow-x: hidden;
+            /* New background image with a dark overlay */
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                              url('https://static.vecteezy.com/system/resources/thumbnails/002/750/961/small/dark-pink-background-with-rectangles-rectangles-with-colorful-gradient-on-abstract-background-design-for-your-business-promotion-vector.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Keyframes for the shining text effect */
+        @keyframes shine {
+            from {
+                background-position: 200% 0;
+            }
+            to {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Class for applying the shining gradient to text */
+        .shimmer-text {
+            background-image: linear-gradient(90deg, #ffffff 0%, #a0a0ff 25%, #ffffff 50%, #a0a0ff 75%, #ffffff 100%);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: shine 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Cool particle animation */
+        @keyframes moveParticles {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .animated-particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(160, 160, 255, 0.5), 0 0 20px rgba(160, 160, 255, 0.3);
+            animation-name: moveParticles;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-duration: 20s;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 relative">
+    <!-- Cool animated particle background -->
+    <div class="animated-particles-container"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.animated-particles-container');
+            const particleCount = 50;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100 + 100}%`; /* Start below the viewport */
+                particle.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                container.appendChild(particle);
+            }
+        });
+    </script>
+
+    <!-- Navigation Bar -->
+    <nav class="py-4 px-6 md:px-12 fixed w-full top-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Updated Logo with Text -->
+            <a href="#" class="text-xl font-extrabold text-white">Clearorbit</a>
+            <!-- Home Link -->
+            <a href="#" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="h-screen flex items-center justify-center text-center px-6">
+            <div class="container mx-auto">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 shimmer-text">
+                    Something Powerful Is Coming
+                </h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light text-gray-300 shimmer-text">
+                    Our next-gen AI-powered digital marketing agency is almost here. Stay tuned for a smarter way to grow your brand.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with Instagram icon -->
+    <footer class="py-4 text-center text-gray-500 text-sm relative z-10">
+        <div class="flex justify-center mb-2">
+            <a href="https://www.instagram.com/clearorbit/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-400 hover:text-white">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+        &copy; All rights reserved to Clearorbit
+    </footer>
+
+</body>
+</html>
