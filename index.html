@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearOrbit - Coming Soon</title>
+  <style>
+    /* Reset & basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      color: #7d3c98; /* Accent color */
+    }
+    h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 18px;
+      max-width: 600px;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+    .countdown {
+      font-size: 22px;
+      margin-top: 20px;
+      color: #7d3c98;
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">ClearOrbit</div>
+  <h1>Something Powerful is Coming</h1>
+  <p>Our next-gen AI-powered digital marketing agency is almost here. Stay tuned for a smarter way to grow your brand.</p>
+
+  <div class="countdown" id="countdown">Launching in 10 days</div>
+
+  <footer>© 2025 ClearOrbit. All Rights Reserved.</footer>
+
+  <script>
+    // Simple countdown timer (10 days from now)
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 10);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "We are live!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
