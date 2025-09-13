@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clearorbit - Digital Marketing</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="./favicon.jpg">
+  <link rel="shortcut icon" href="./favicon.jpg" type="image/x-icon">  
+ 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white relative">
+
+  <!-- Header -->
+  <header class="relative z-50 py-4 px-6 md:px-12 fixed top-0 w-full flex justify-between items-center bg-black bg-opacity-70 backdrop-blur-sm">
+    <a href="#home" class="text-xl font-extrabold text-white">Clearorbit</a>
+    <nav class="hidden md:flex space-x-6 text-sm">
+      <a href="#about" class="text-gray-300 hover:text-white transition duration-300">About</a>
+      <a href="#services" class="text-gray-300 hover:text-white transition duration-300">Services</a>
+      <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-300">Why Choose Us</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+    </nav>
+    <button id="mobile-menu-button" class="md:hidden text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Main Sections -->
+  <main class="relative z-10">
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 md:pt-32">
+      <div class="container mx-auto -mt-24">
+        <h1 class="text-xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight mb-4 text-white">
+          Smarter Growth. Powered by AI.
+        </h1>
+        <p class="text-xs max-w-2xl mx-auto mb-8 font-light text-gray-300">
+          We’re a next-gen digital marketing agency helping brands grow through social media, SEO, ads, and AI-powered insights.
+        </p>
+        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-6 py-3 transition-colors duration-200 inline-block">
+          Let’s Work Together
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-12 px-6 relative z-10">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 max-w-5xl">
+        <div class="md:w-1/2 text-center md:text-left">
+          <h2 class="text-3xl font-bold mb-4">Who are we?</h2>
+          <p class="text-lg text-gray-400 leading-relaxed">
+            ClearOrbit is a new-age digital marketing agency built for the future.<br><br>
+            We combine proven strategies in social media, SEO, ads, and content with the intelligence of AI to deliver smarter, faster growth.<br><br>
+            Our team blends human creativity with data-driven precision — focusing not on vanity metrics, but real results that matter: reach, leads, and revenue.
+          </p>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <!-- SVG Illustration -->
+          <svg class="w-full h-auto max-w-sm" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#818CF8;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="250" cy="250" r="240" fill="none" stroke="url(#g1)" stroke-width="5" opacity="0.2"/>
+            <path d="M 100 250 Q 250 50 400 250 T 250 450 T 100 250" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="250" cy="250" r="15" fill="#818CF8">
+              <animate attributeName="r" values="15; 20; 15" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="150" cy="350" r="10" fill="#4F46E5">
+              <animate attributeName="r" values="10; 15; 10" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="350" cy="150" r="12" fill="#818CF8">
+              <animate attributeName="r" values="12; 17; 12" dur="5s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-16 px-6 relative z-10">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">Our Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          <div class="service-card">
+            <h3 class="text-xl font-semibold mb-2">AI-Powered SEO</h3>
+            <p class="text-gray-400 text-sm">Leverage our intelligent algorithms to dominate search rankings and attract organic traffic with precision.</p>
+          </div>
+          <div class="service-card">
+            <h3 class="text-xl font-semibold mb-2">Social Media Strategy</h3>
+            <p class="text-gray-400 text-sm">From content creation to audience engagement, our AI-driven social plans boost your brand's presence.</p>
+          </div>
+          <div class="service-card">
+            <h3 class="text-xl font-semibold mb-2">Content Marketing</h3>
+            <p class="text-gray-400 text-sm">We create compelling, data-optimized content that resonates with your target audience and drives conversions.</p>
+          </div>
+          <div class="service-card">
+            <h3 class="text-xl font-semibold mb-2">PPC Advertising</h3>
+            <p class="text-gray-400 text-sm">Our smart bidding strategies ensure maximum ROI on your paid campaigns with minimal waste.</p>
+          </div>
+          <div class="service-card">
+            <h3 class="text-xl font-semibold mb-2">Analytics & Reporting</h3>
+            <p class="text-gray-400 text-sm">Gain a clear view of your performance with our detailed, AI-generated reports and actionable insights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-choose-us" class="py-16 px-6 relative z-10">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-12">Why Choose Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="choose-card">
+            <h3 class="text-xl font-semibold mb-2">AI + Human Expertise</h3>
+            <p class="text-gray-400 text-sm">Smart automation meets creativity.</p>
+          </div>
+          <div class="choose-card">
+            <h3 class="text-xl font-semibold mb-2">ROI-Driven</h3>
+            <p class="text-gray-400 text-sm">We focus on growth that actually matters.</p>
+          </div>
+          <div class="choose-card">
+            <h3 class="text-xl font-semibold mb-2">Scalable Solutions</h3>
+            <p class="text-gray-400 text-sm">Perfect for startups and growing brands.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 px-6 relative z-10">
+      <div class="container mx-auto text-center max-w-2xl">
+        <h2 class="text-3xl font-bold mb-8">Get In Touch</h2>
+        <form id="contact-form" class="space-y-6">
+          <input type="text" id="contact-name" placeholder="Your Name" class="form-input">
+          <input type="email" id="contact-email" placeholder="Your Email" class="form-input">
+          <textarea id="contact-message" rows="5" placeholder="Your Message" class="form-input"></textarea>
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-8 py-3 w-full transition-colors duration-200">Send Message</button>
+          <div id="contact-message-div" class="mt-4 text-green-400 hidden">Your message has been sent successfully!</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center text-gray-500 text-sm relative z-10">
+    <div class="flex justify-center mb-2">
+      <a href="https://www.instagram.com/clearorbit/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+        </svg>
+      </a>
+    </div>
+    &copy; All rights reserved to Clearorbit
+  </footer>
+
+  <!-- Contact Form Script -->
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+      const messageDiv = document.getElementById('contact-message-div');
+
+      if (name && email && message) {
+        messageDiv.textContent = 'Your message has been sent successfully!';
+        messageDiv.classList.remove('hidden', 'text-red-400');
+        messageDiv.classList.add('text-green-400');
+        document.getElementById('contact-form').reset();
+      } else {
+        messageDiv.textContent = 'Please fill out all fields.';
+        messageDiv.classList.remove('hidden', 'text-green-400');
+        messageDiv.classList.add('text-red-400');
+      }
+    });
+  </script>
+</body>
+</html>
