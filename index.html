@@ -1,225 +1,797 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clearorbit - Digital Marketing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearOrbit - Precision Digital Strategy</title>
+    <!-- Load Tailwind CSS from CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide icons for aesthetics --><script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom font import for better typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Global CSS with solid black background */
+        html, body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            scroll-behavior: smooth;
+            
+            /* CRITICAL: Solid Black Background */
+            background-image: url('neon-sumer-K8eWS_abimM-unsplash.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #000000; /* Fallback */
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="./favicon.jpg">
-  <link rel="shortcut icon" href="./favicon.jpg" type="image/x-icon">  
- 
+        }
+        
+        /* --- HERO SECTION BACKGROUND --- */
+        #home {
+            /* Now uses the dark overlay over the solid black body background */
+            position: relative;
+            overflow: hidden; 
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css">
-
-</style>
+        /* Utility classes updated from indigo to blue */
+        .text-primary { color: #3b82f6; } 
+        .bg-primary { background-color: #2563eb; } 
+        .hover\:bg-primary:hover { background-color: #1d4ed8; } 
+        .border-accent { border-color: #2563eb; } 
+        
+        /* Adjusted background colors to be semi-transparent for starry background visibility */
+        .bg-card { background-color: rgba(17, 24, 39, 0.85); }
+        .text-blue-500 { color: #3b82f6; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+        .border-blue-600 { border-color: #2563eb; }
+        .shadow-blue-900\/50 { --tw-shadow-color: #1e3a8a; --tw-shadow: var(--tw-shadow-color) 0 10px 15px -3px, var(--tw-shadow-color) 0 4px 6px -4px; box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+        
+        /* --- HORIZONTAL SCROLL FIXES --- */
+        #services-slider {
+            scroll-snap-type: x mandatory;
+            scroll-padding-left: 2rem;
+            scroll-padding-right: 2rem;
+        }
+        #services-slider::-webkit-scrollbar, #image-slider::-webkit-scrollbar {
+            height: 6px;
+        }
+        #services-slider::-webkit-scrollbar-thumb, #image-slider::-webkit-scrollbar-thumb {
+            background-color: #1e3a8a;
+            border-radius: 3px;
+        }
+        #services-slider::-webkit-scrollbar-track, #image-slider::-webkit-scrollbar-track {
+            background-color: #0d1117;
+        }
+        .service-card-width {
+            width: calc(100vw - 3rem);
+        }
+        @media (min-width: 1024px) {
+            .service-card-width {
+                width: 480px;
+            }
+        }
+        
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 100%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Glow box-shadow for simple hover effect */
+        .glow-border:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+            border-color: #3b82f6; 
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation for CTA buttons */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        /* Section reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="bg-black text-white relative">
+<body class="min-h-screen antialiased">
+    
+    <!-- Theme Configuration (for JavaScript use) --><script>
+        const THEME = {
+            primary: 'bg-blue-600 hover:bg-blue-700',
+            textPrimary: 'text-blue-500', 
+            textLight: 'text-white',
+            textSub: 'text-gray-400',
+            bgMain: 'bg-black',
+            bgCard: 'bg-gray-900',
+            borderAccent: 'border-blue-600',
+        };
+    </script>
 
-  <!-- Header -->
-  <header class="relative z-50 py-4 px-6 md:px-12 fixed top-0 w-full flex justify-between items-center bg-black bg-opacity-70 backdrop-blur-sm">
-    <a href="#home" class="text-xl font-extrabold text-white">Clearorbit</a>
- <nav class="hidden md:flex space-x-6 text-sm">
-  <a href="#about" class="text-gray-300 hover:text-white transition duration-300">About</a>
-  <a href="#services" class="text-gray-300 hover:text-white transition duration-300">Services</a>
-  <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-300">Why Choose Us</a>
-  <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
-</nav>
-<!-- Mobile dropdown menu -->
-<div id="mobile-menu" class="hidden md:hidden absolute top-16 right-0 bg-black bg-opacity-95 p-6 space-y-4 w-48 rounded-md shadow-lg">
-  <a href="#about" class="block text-gray-300 hover:text-white transition duration-300">About</a>
-  <a href="#services" class="block text-gray-300 hover:text-white transition duration-300">Services</a>
-  <a href="#why-choose-us" class="block text-gray-300 hover:text-white transition duration-300">Why Choose Us</a>
-  <a href="#contact" class="block text-gray-300 hover:text-white transition duration-300">Contact</a>
-</div>
+    <!-- Header & Navigation --><header id="header" class="sticky top-0 z-50 bg-black/80 backdrop-blur-md transition duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo - Text Only --><a href="#home" class="flex-shrink-0 flex items-center">
+                    <img 
+                        src="logo orbit .png" 
+                        alt="ClearOrbit Logo" 
+                        class="h-10 sm:h-12 w-auto"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEyIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIvPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSI2IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIvPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyIiBmaWxsPSIjZmZmZmZmIi8+CjxjaXJjbGUgY3g9IjI2IiBjeT0iMTQiIHI9IjEuNSIgZmlsbD0iI2ZmZmZmZiIvPgo8Y2lyY2xlIGN4PSIxNCIgY3k9IjI2IiByPSIxLjUiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+';"
+                        data-replace-logo-here="true"
+                    />
+                </a>
 
-    <button id="mobile-menu-button" class="md:hidden text-white">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-  </header>
+                <!-- Desktop Navigation --><nav class="hidden md:flex space-x-2">
+                    <a href="#home" class="text-sm font-medium text-white hover:text-blue-500 transition duration-150 py-2 px-3 rounded-lg hover:bg-white/5">Home</a>
+                    <a href="#about" class="text-sm font-medium text-white hover:text-blue-500 transition duration-150 py-2 px-3 rounded-lg hover:bg-white/5">About</a>
+                    <a href="#services" class="text-sm font-medium text-white hover:text-blue-500 transition duration-150 py-2 px-3 rounded-lg hover:bg-white/5">Services</a>
+                    <a href="#blog" class="text-sm font-medium text-white hover:text-blue-500 transition duration-150 py-2 px-3 rounded-lg hover:bg-white/5">Blog</a>
+                    <a href="#contact" class="text-sm font-medium text-white hover:text-blue-500 transition duration-150 py-2 px-3 rounded-lg hover:bg-white/5">Contact Us</a>
+                </nav>
 
-  <!-- Main Sections -->
-  <main class="relative z-10">
-    <!-- Hero -->
-    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 md:pt-32">
-      <div class="container mx-auto -mt-24">
-        <h1 class="text-xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight mb-4 text-white">
-          Smarter Growth. Powered by AI.
-        </h1>
-        <p class="text-xs max-w-2xl mx-auto mb-8 font-light text-gray-300">
-          We’re a next-gen digital marketing agency helping brands grow through social media, SEO, ads, and AI-powered insights.
-        </p>
-        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-6 py-3 transition-colors duration-200 inline-block">
-          Let’s Work Together
-        </a>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-12 px-6 relative z-10">
-      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 max-w-5xl">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h2 class="text-3xl font-bold mb-4">Who are we?</h2>
-          <p class="text-lg text-gray-400 leading-relaxed">
-            ClearOrbit is a new-age digital marketing agency built for the future.<br><br>
-            We combine proven strategies in social media, SEO, ads, and content with the intelligence of AI to deliver smarter, faster growth.<br><br>
-            Our team blends human creativity with data-driven precision — focusing not on vanity metrics, but real results that matter: reach, leads, and revenue.
-          </p>
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-white p-2 rounded-lg hover:bg-gray-700 transition" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="md:w-1/2 flex justify-center">
-          <!-- SVG Illustration -->
-          <svg class="w-full h-auto max-w-sm" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#818CF8;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-            <circle cx="250" cy="250" r="240" fill="none" stroke="url(#g1)" stroke-width="5" opacity="0.2"/>
-            <path d="M 100 250 Q 250 50 400 250 T 250 450 T 100 250" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="250" cy="250" r="15" fill="#818CF8">
-              <animate attributeName="r" values="15; 20; 15" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="150" cy="350" r="10" fill="#4F46E5">
-              <animate attributeName="r" values="10; 15; 10" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="350" cy="150" r="12" fill="#818CF8">
-              <animate attributeName="r" values="12; 17; 12" dur="5s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
+
+        <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="md:hidden hidden bg-gray-900/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 mobile-nav-links">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 hover:text-blue-500" data-nav-link>
+                    <i data-lucide="home" class="inline w-5 h-5 mr-2 -mt-1"></i> Home
+                </a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 hover:text-blue-500" data-nav-link>
+                    <i data-lucide="info" class="inline w-5 h-5 mr-2 -mt-1"></i> About
+                </a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 hover:text-blue-500" data-nav-link>
+                    <i data-lucide="briefcase" class="inline w-5 h-5 mr-2 -mt-1"></i> Services
+                </a>
+                <a href="#blog" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 hover:text-blue-500" data-nav-link>
+                    <i data-lucide="feather" class="inline w-5 h-5 mr-2 -mt-1"></i> Blog
+                </a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 hover:text-blue-500" data-nav-link>
+                    <i data-lucide="mail" class="inline w-5 h-5 mr-2 -mt-1"></i> Contact Us
+                </a>
+            </div>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- Services -->
-    <section id="services" class="py-16 px-6 relative z-10">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-8">Our Services</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          <div class="service-card">
-            <h3 class="text-xl font-semibold mb-2">AI-Powered SEO</h3>
-            <p class="text-gray-400 text-sm">Leverage our intelligent algorithms to dominate search rankings and attract organic traffic with precision.</p>
-          </div>
-          <div class="service-card">
-            <h3 class="text-xl font-semibold mb-2">Social Media Strategy</h3>
-            <p class="text-gray-400 text-sm">From content creation to audience engagement, our AI-driven social plans boost your brand's presence.</p>
-          </div>
-          <div class="service-card">
-            <h3 class="text-xl font-semibold mb-2">Content Marketing</h3>
-            <p class="text-gray-400 text-sm">We create compelling, data-optimized content that resonates with your target audience and drives conversions.</p>
-          </div>
-          <div class="service-card">
-            <h3 class="text-xl font-semibold mb-2">PPC Advertising</h3>
-            <p class="text-gray-400 text-sm">Our smart bidding strategies ensure maximum ROI on your paid campaigns with minimal waste.</p>
-          </div>
-          <div class="service-card">
-            <h3 class="text-xl font-semibold mb-2">Analytics & Reporting</h3>
-            <p class="text-gray-400 text-sm">Gain a clear view of your performance with our detailed, AI-generated reports and actionable insights.</p>
-          </div>
+    <main>
+        <!-- Hero Section --><section id="home" class="pt-24 pb-32 text-center min-h-screen flex items-center justify-center relative overflow-hidden">
+            
+            <!-- Dark Overlay over the fixed background image --><div class="absolute inset-0 bg-black/70"></div> 
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="md:max-w-5xl mx-auto">
+                    <!-- Heading --><h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Achieve <span class="gradient-text">Orbital Precision</span> in Digital Strategy.
+                    </h1>
+                    
+                    <!-- Subtext --><p class="mt-6 text-lg sm:text-xl font-light text-gray-300 max-w-4xl mx-auto">
+                        ClearOrbit is your full-stack digital partner, engineering bespoke solutions that don't just reach targets—they transcend them.
+                    </p>
+                    
+                    <!-- Button --><div class="mt-12 flex justify-center space-x-4">
+                        <a href="https://wa.me/918839814931?text=Hello%20ClearOrbit%2C%20I%20am%20interested%20in%20discussing%20a%20new%20digital%20project." target="_blank" class="px-8 py-3 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition duration-200 transform hover:scale-105 shadow-xl shadow-blue-900/50 pulse-glow" onclick="event.stopPropagation()">
+                            Launch Your Project
+                        </a>
+                        <a href="#services" class="px-8 py-3 text-lg font-bold rounded-xl bg-transparent border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white transition duration-300">
+                            Explore Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section --><section id="about" class="bg-black/70 py-20 border-b border-gray-800/50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-center text-4xl font-extrabold text-white mb-16 reveal">
+                    About ClearOrbit
+                </h2>
+
+                <!-- 1. What We Do: Takes Full Space --><div class="lg:max-w-5xl lg:mx-auto reveal">
+                    <h3 class="text-3xl font-bold text-blue-500 mb-4">
+                        What We Do: Strategic Digital Architecture
+                    </h3>
+                    <h4 class="text-xl font-semibold text-gray-200 mb-6">
+                        Integrating Marketing and Engineering for Predictable Growth.
+                    </h4>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                        At ClearOrbit, our mission is simple: eliminate complexity and deliver clarity. We don't just execute tasks; we architect cohesive digital ecosystems. This means your <strong class="font-semibold text-white">social media strategy</strong> directly feeds into your <strong class="font-semibold text-white">SEO authority</strong>, and your <strong class="font-semibold text-white">content marketing</strong> is built on a foundation of solid, scalable <strong class="font-semibold text-white">software development</strong>. We transition your digital presence from chaotic noise into a high-functioning machine designed for maximum performance and sustained ROI. We are the engineering layer beneath your marketing genius.
+                    </p>
+                    
+                    <!-- Commitment Section --><div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-b border-gray-800 py-6">
+                        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-card transition duration-300 glow-border hover:bg-gray-800">
+                            <i data-lucide="code" class="w-10 h-10 text-blue-500 mb-4"></i>
+                            <p class="text-base font-semibold text-white">Scalable Solutions</p>
+                            <p class="text-sm text-gray-400 mt-2">Future-proof digital architectures that grow with your business</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-card transition duration-300 glow-border hover:bg-gray-800">
+                            <i data-lucide="bar-chart-3" class="w-10 h-10 text-blue-500 mb-4"></i>
+                            <p class="text-base font-semibold text-white">Data-Driven Decisions</p>
+                            <p class="text-sm text-gray-400 mt-2">Actionable insights derived from comprehensive analytics</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-card transition duration-300 glow-border hover:bg-gray-800">
+                            <i data-lucide="layers" class="w-10 h-10 text-blue-500 mb-4"></i>
+                            <p class="text-base font-semibold text-white">100% Transparency</p>
+                            <p class="text-sm text-gray-400 mt-2">Clear communication and complete visibility into our processes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Join Our Team: Below and Smaller --><div class="max-w-lg mx-auto mt-20 reveal">
+                        <div class="p-8 rounded-2xl bg-card border border-gray-800 flex flex-col justify-center items-center text-center shadow-2xl glow-border">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mb-4">
+                                <i data-lucide="user-check" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Join Our Team</h3>
+                            <p class="text-gray-400 mb-6">
+                                We're always looking for stellar engineers and brilliant marketers who are ready to push the boundaries of digital possibility. 
+                            </p>
+                            <!-- WhatsApp Link -->
+                            <a href="https://wa.me/918839814931?text=Hello%20ClearOrbit%2C%20I%20am%20interested%20in%20career%20opportunities%20with%20your%20team." target="_blank" class="px-6 py-3 font-semibold rounded-lg bg-transparent border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white transition duration-300" onclick="event.stopPropagation()">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section --><section id="services" class="bg-black/70 py-20 border-b border-gray-800/50 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl font-extrabold text-center text-white mb-4 reveal">
+                        Our Service Portfolio
+                    </h2>
+                    <p class="text-xl text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal">
+                        Integrated services engineered to drive engagement and revenue across all digital touchpoints.
+                    </p>
+                </div>
+                
+                <!-- Horizontal Scroll Container for Service Cards --><div id="services-slider" class="flex overflow-x-scroll snap-x snap-mandatory pb-6 px-4 md:px-8 space-x-8">
+                    
+                    <!-- Service Card 1: Social Media Marketing --><div class="flex-shrink-0 service-card-width snap-center p-10 rounded-xl bg-card border border-gray-800 service-card glow-border flex flex-col space-y-6 min-h-[400px]">
+                        
+                        <!-- Icon with stronger blue background --><div class="flex-shrink-0">
+                            <div class="w-16 h-16 p-4 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+                                <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                            </div >
+                        </div>
+
+                        <!-- Text Content --><div class="flex-grow">
+                            <!-- Heading --><h3 class="text-3xl font-bold text-white mb-3">Social Media Marketing</h3>
+                            <!-- Subtext --><p class="text-gray-400 text-base leading-relaxed">Crafting impactful social strategies to build brand loyalty and maximize reach across all major platforms. We focus on platform-specific optimization and trend-based engagement to deliver consistent, measurable ROI.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 2: Content Marketing --><div class="flex-shrink-0 service-card-width snap-center p-10 rounded-xl bg-card border border-gray-800 service-card glow-border flex flex-col space-y-6 min-h-[400px]">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 p-4 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+                                <i data-lucide="rss" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex-grow">
+                            <h3 class="text-3xl font-bold text-white mb-3">Content Marketing</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">Developing compelling narratives and high-value educational content that positions you as a thought leader. Our content aligns perfectly with your sales funnel to convert readers into long-term customers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3: SEO Strategy & Execution --><div class="flex-shrink-0 service-card-width snap-center p-10 rounded-xl bg-card border border-gray-800 service-card glow-border flex flex-col space-y-6 min-h-[400px]">
+                        
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 p-4 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+                                <i data-lucide="layers" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex-grow">
+                            <h3 class="text-3xl font-bold text-white mb-3">SEO Strategy & Execution</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">Achieving top organic rankings through technical SEO audits, keyword research, and on-page optimization. We ensure your site structure supports long-term search authority and predictable performance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4: Content Creation & Designing --><div class="flex-shrink-0 service-card-width snap-center p-10 rounded-xl bg-card border border-gray-800 service-card glow-border flex flex-col space-y-6 min-h-[400px]">
+                        
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 p-4 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+                                <i data-lucide="palette" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex-grow">
+                            <h3 class="text-3xl font-bold text-white mb-3">Content Creation & Designing</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">Producing stunning visuals, videos, and design assets that stop the scroll and drive conversion. Our design team focuses on aesthetics coupled with conversion psychology and brand consistency.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination Dots --><div id="services-dots" class="flex justify-center space-x-3 mt-8">
+                    <button class="dot w-3 h-3 bg-blue-600 rounded-full transition duration-300" data-card-index="0"></button>
+                    <button class="dot w-3 h-3 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-300" data-card-index="1"></button>
+                    <button class="dot w-3 h-3 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-300" data-card-index="2"></button>
+                    <button class="dot w-3 h-3 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-300" data-card-index="3"></button>
+                </div>
+
+            </section>
+
+            <!-- Blog Section --><section id="blog" class="bg-black/70 py-20 border-b border-gray-800/50 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl font-extrabold text-center text-white mb-12 reveal">
+                        Insights & Thought Leadership
+                    </h2>
+                    <p class="text-xl text-center text-gray-400 max-w-2xl mx-auto mb-10 reveal">
+                        Get ahead of the curve with strategic analysis and high-value articles generated from real-time web data.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                        <!-- Blog Post 1: Social Media Marketing --><div id="blog-post-social" class="blog-post-card p-6 rounded-xl bg-card border border-blue-700/50 flex flex-col glow-border reveal">
+                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-4">
+                                <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Why Social Media is the Engine of Modern ROI</h3>
+                            <div class="text-gray-400 text-sm loading-text">Loading insights...</div>
+                        </div>
+
+                        <!-- Blog Post 2: SEO Strategy --><div id="blog-post-seo" class="blog-post-card p-6 rounded-xl bg-card border border-blue-700/50 flex flex-col glow-border reveal">
+                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-4">
+                                <i data-lucide="layers" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Mastering Technical SEO for Digital Authority</h3>
+                            <div class="text-gray-400 text-sm loading-text">Loading insights...</div>
+                        </div>
+                        
+                        <!-- Blog Post 3: Content Creation --><div id="blog-post-content-creation" class="blog-post-card p-6 rounded-xl bg-card border border-blue-700/50 flex flex-col glow-border reveal">
+                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-4">
+                                <i data-lucide="palette" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">The Power of Visual Content in Today's Market</h3>
+                            <div class="text-gray-400 text-sm loading-text">Loading insights...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <!-- Resource Carousel Section --><section id="resource-carousel" class="bg-black/70 py-20 border-b border-gray-800/50 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl font-extrabold text-center text-white mb-12 reveal">
+                        Essential Reading & Resources
+                    </h2>
+
+                    <!-- Image Carousel Container --><div id="image-slider" class="flex overflow-x-scroll snap-x snap-mandatory pb-6 space-x-6 -mx-4 sm:mx-0">
+                        
+                        <!-- Image Card 1: Marketing Management --><a href="https://www.gisma.com/blog/why-is-marketing-management-important-to-businesses" target="_blank" class="flex-shrink-0 w-[90vw] sm:w-[calc(66%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] snap-center rounded-xl overflow-hidden shadow-2xl transition duration-300 transform hover:scale-[1.02] border-2 border-gray-800 hover:border-blue-600 group glow-border">
+                            <img src="https://placehold.co/900x500/155e75/e0f2f1?text=Marketing+Management+Strategy" alt="Marketing Management Strategy" class="w-full h-auto object-cover" />
+                            <div class="p-4 bg-card">
+                                <p class="text-white font-semibold group-hover:text-blue-400">Why Marketing Management is Essential</p>
+                                <p class="text-xs text-gray-500">GISMA Business School</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Image Card 2: Marketing Definition --><a href="https://www.investopedia.com/terms/m/marketing.asp" target="_blank" class="flex-shrink-0 w-[90vw] sm:w-[calc(66%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] snap-center rounded-xl overflow-hidden shadow-2xl transition duration-300 transform hover:scale-[1.02] border-2 border-gray-800 hover:border-blue-600 group glow-border">
+                            <img src="https://placehold.co/900x500/166534/dcfce7?text=The+Fundamentals+of+Marketing" alt="Marketing Fundamentals" class="w-full h-auto object-cover" />
+                            <div class="p-4 bg-card">
+                                <p class="text-white font-semibold group-hover:text-blue-400">Defining the Core of Marketing</p>
+                                <p class="text-xs text-gray-500">Investopedia</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Image Card 3: Importance of Marketing --><a href="https://archive.abs.edu.in/blog/why-is-marketing-important-9-reasons-why-you-really-do-need-it/" target="_blank" class="flex-shrink-0 w-[90vw] sm:w-[calc(66%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] snap-center rounded-xl overflow-hidden shadow-2xl transition duration-300 transform hover:scale-[1.02] border-2 border-gray-800 hover:border-blue-600 group glow-border">
+                            <img src="https://placehold.co/900x500/9d174d/fce7f3?text=9+Reasons+Marketing+Matters" alt="Importance of Marketing" class="w-full h-auto object-cover" />
+                            <div class="p-4 bg-card">
+                                <p class="text-white font-semibold group-hover:text-blue-400">9 Reasons Why Marketing is Crucial</p>
+                                <p class="text-xs text-gray-500">ABS Education</p>
+                            </div>
+                        </a>
+                        
+                    </div>
+
+                    <!-- Pagination Dots --><div id="image-dots" class="flex justify-center space-x-3 mt-8">
+                        <button class="dot-image w-3 h-3 bg-blue-600 rounded-full transition duration-300" data-card-index="0"></button>
+                        <button class="dot-image w-3 h-3 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-300" data-card-index="1"></button>
+                        <button class="dot-image w-3 h-3 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-300" data-card-index="2"></button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Contact Section --><section id="contact" class="bg-black/70 py-20 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl font-extrabold text-center text-white mb-12 reveal">
+                        Ready to Elevate Your Digital Orbit?
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 bg-card rounded-3xl shadow-2xl overflow-hidden border border-blue-800/50 glow-border reveal">
+                        
+                        <!-- Contact Form --><div class="p-8 sm:p-12">
+                            <h3 class="text-3xl font-bold text-white mb-6">Let's Talk Strategy</h3>
+                            <!-- Converted form to a direct link to WhatsApp --><div class="space-y-6">
+                                
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-400">Full Name</label>
+                                    <input type="text" id="name" required class="mt-1 block w-full px-4 py-3 border border-gray-700 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-800 text-white transition duration-150" placeholder="Jane Doe" />
+                                </div>
+
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-400">Work Email</label>
+                                    <input type="email" id="email" required class="mt-1 block w-full px-4 py-3 border border-gray-700 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-800 text-white transition duration-150" placeholder="jane@company.com" />
+                                </div>
+
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-400">Project Details</label>
+                                    <textarea id="message" rows="4" required class="mt-1 block w-full px-4 py-3 border border-gray-700 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-800 text-white transition duration-150" placeholder="Tell us about your challenge and goals..."></textarea>
+                                </div>
+                                
+                                <a href="https://wa.me/918839814931?text=Hello%20ClearOrbit%2C%20I%20am%20interested%20in%20discussing%20a%20new%20digital%20project." target="_blank" class="w-full px-4 py-3 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition duration-300 transform hover:scale-[1.01] shadow-md text-center inline-block pulse-glow" onclick="event.stopPropagation()">
+                                    Send Inquiry
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Image/Visual Element --><div class="hidden lg:block relative p-12 bg-gradient-to-br from-gray-800 to-gray-900">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="aperture" class="w-32 h-32 text-blue-500 opacity-30 animate-pulse"></i>
+                            </div>
+                            <div class="w-full h-full flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mx-auto mb-6 float-animation">
+                                        <i data-lucide="message-circle" class="w-12 h-12 text-white"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2">Let's Connect</h3>
+                                    <p class="text-gray-400">We're excited to discuss how we can elevate your digital presence</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- Why Choose Us -->
-    <section id="why-choose-us" class="py-16 px-6 relative z-10">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-12">Why Choose Us</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="choose-card">
-            <h3 class="text-xl font-semibold mb-2">AI + Human Expertise</h3>
-            <p class="text-gray-400 text-sm">Smart automation meets creativity.</p>
-          </div>
-          <div class="choose-card">
-            <h3 class="text-xl font-semibold mb-2">ROI-Driven</h3>
-            <p class="text-gray-400 text-sm">We focus on growth that actually matters.</p>
-          </div>
-          <div class="choose-card">
-            <h3 class="text-xl font-semibold mb-2">Scalable Solutions</h3>
-            <p class="text-gray-400 text-sm">Perfect for startups and growing brands.</p>
-          </div>
+    <!-- Footer - Placed at the bottom of the page --><footer class="bg-black/70 py-12 border-t border-gray-800 text-white w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Increased padding on the main grid for better separation --><div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-10 mb-10">
+                
+                <!-- Brand (Using text for logo here for simpler footer) --><div>
+                    <div class="text-white font-bold text-xl gradient-text mb-4">
+                        ClearOrbit
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        Precision Digital Engineering.
+                    </p>
+                </div>
+
+                <!-- Quick Links --><div>
+                    <h4 class="text-lg font-semibold mb-4 text-blue-400">Navigation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-150">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-150">About</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-150">Services</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-white transition duration-150">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details (FIXED AND ALIGNED) --><div>
+                    <h4 class="text-lg font-semibold mb-4 text-blue-400">Contact</h4>
+                    <div class="space-y-3 text-sm">
+                        <!-- Email Link with mailto: protocol and correct alignment --><p class="flex items-center text-gray-400">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2 text-blue-400 flex-shrink-0"></i>
+                            <a href="mailto:clearorbitwork@gmail.com" class="hover:text-white truncate">clearorbitwork@gmail.com</a>
+                        </p>
+                        <!-- Phone Link with tel: protocol and correct alignment --><p class="flex items-center text-gray-400">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2 text-blue-400 flex-shrink-0"></i>
+                            <a href="tel:+918839814931" class="hover:text-white">+91 8839814931</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social Media (UPDATED) --><div>
+                    <h4 class="text-lg font-semibold mb-4 text-blue-400">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/clear-orbit-in/?viewAsMember=true" target="_blank" aria-label="LinkedIn" class="text-gray-400 hover:text-blue-400 transition duration-150">
+                            <i data-lucide="linkedin" class="w-6 h-6"></i>
+                        </a>
+                        <a href="https://www.instagram.com/clearorbit" target="_blank" aria-label="Instagram" class="text-gray-400 hover:text-blue-400 transition duration-150">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- SEO Keywords Section --><div class="mt-8 pt-6 border-t border-gray-800 text-center">
+                <h5 class="text-xs font-semibold text-gray-700 uppercase mb-2">Location & Service Keywords</h5>
+                <p class="text-[10px] text-gray-700 leading-relaxed font-light">
+                    digital marketing agency indore | digital marketing company in indore | indore digital marketing company | web development company in indore | website development company in indore | ad agency in indore | advertising agency in indore | advertising companies in indore | digital marketing in indore | indore seo company | best digital marketing company in indore | indore marketing company | marketing agency in indore | best digital marketing agency in indore | digital marketing services in indore | seo services in indore | seo services indore | best seo company in indore | seo agency in indore | social media marketing in indore | digital marketing services indore | social media marketing agency in indore
+                </p>
+            </div>
+
+            <div class="text-center text-sm text-gray-600 mt-4 pt-4 border-t border-gray-800">
+                &copy; 2024 ClearOrbit. All rights reserved.
+            </div>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- Contact -->
-    <section id="contact" class="py-20 px-6 relative z-10">
-      <div class="container mx-auto text-center max-w-2xl">
-        <h2 class="text-3xl font-bold mb-8">Get In Touch</h2>
-        <form id="contact-form" class="space-y-6">
-          <input type="text" id="contact-name" placeholder="Your Name" class="form-input">
-          <input type="email" id="contact-email" placeholder="Your Email" class="form-input">
-          <textarea id="contact-message" rows="5" placeholder="Your Message" class="form-input"></textarea>
-          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-8 py-3 w-full transition-colors duration-200">Send Message</button>
-          <div id="contact-message-div" class="mt-4 text-green-400 hidden">Your message has been sent successfully!</div>
-        </form>
-      </div>
-    </section>
-  </main>
+    <!-- Vanilla JavaScript for interactivity and Blog content simulation --><script>
+        // --- Mobile Menu Toggle Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const navLinks = document.querySelectorAll('[data-nav-link], nav a[href^="#"]'); 
 
-  <!-- Footer -->
-  <footer class="py-4 text-center text-gray-500 text-sm relative z-10">
-    <div class="flex justify-center mb-2">
-      <a href="https://www.instagram.com/clearorbit/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
-        </svg>
-      </a>
-    </div>
-    &copy; All rights reserved to Clearorbit
-  </footer>
+            const toggleMenu = () => {
+                const isExpanded = menu.classList.contains('hidden');
+                menu.classList.toggle('hidden');
+                button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+                
+                // Toggle the hamburger/close icon path
+                menuIcon.setAttribute('d', isExpanded ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"); 
+                lucide.createIcons();
+            };
 
-  <!-- Contact Form Script -->
-  <script>
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const message = document.getElementById('contact-message').value;
-      const messageDiv = document.getElementById('contact-message-div');
+            button.addEventListener('click', toggleMenu);
 
-      if (name && email && message) {
-        messageDiv.textContent = 'Your message has been sent successfully!';
-        messageDiv.classList.remove('hidden', 'text-red-400');
-        messageDiv.classList.add('text-green-400');
-        document.getElementById('contact-form').reset();
-      } else {
-        messageDiv.textContent = 'Please fill out all fields.';
-        messageDiv.classList.remove('hidden', 'text-green-400');
-        messageDiv.classList.add('text-red-400');
-      }
-    });
-  </script>
-  <script>
-  const menuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
+            // FIX: Handle smooth scroll to section on anchor click (now using native vertical scroll)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        
+                        // Only hide if the menu is visible (for mobile)
+                        if (menu && !menu.classList.contains('hidden')) {
+                            // Ensure the toggle happens after scroll, or immediately if necessary
+                            toggleMenu();
+                        }
+                    }
+                });
+            });
 
-  menuButton.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-</script>
-<script>
-  const menuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
+            // Re-render all Lucide icons on load
+            lucide.createIcons();
+            
+            // Initialize the horizontal scroll functionality for services
+            initServiceScroll(); 
+            initImageCarousel(); // Initialize the new image carousel
+            
+            // Initialize scroll reveal animations
+            initScrollReveal();
+        });
 
-  menuButton.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-</script>
+        // --- Scroll Reveal Animation ---
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        }
+
+        // --- New JavaScript for Services Horizontal Scroll and Dots ---
+        const initServiceScroll = () => {
+            const slider = document.getElementById('services-slider');
+            const dotsContainer = document.getElementById('services-dots');
+            
+            const cards = slider ? slider.querySelectorAll('.flex-shrink-0') : []; 
+            if (!slider || !dotsContainer || cards.length === 0) return;
+
+            const dotButtons = dotsContainer.querySelectorAll('.dot');
+            const activeDotClass = 'bg-blue-600';
+            const inactiveDotClass = 'bg-gray-700 hover:bg-gray-600';
+
+            // 1. Dot Navigation (Clicking dot scrolls to card)
+            dotButtons.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-card-index'));
+                    const card = cards[index];
+                    
+                    if (card) {
+                        // FIX: Improved calculation for centering the card based on its offset and the slider's viewport
+                        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                        const offset = card.offsetLeft - (slider.offsetWidth / 2) + (card.offsetWidth / 2);
+
+                        slider.scrollTo({
+                            left: offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 2. Scroll Tracking (Updates dots on scroll)
+            const updateDots = () => {
+                const scrollLeft = slider.scrollLeft;
+                const sliderWidth = slider.offsetWidth;
+                
+                let activeIndex = 0;
+                let minDiff = Infinity;
+
+                cards.forEach((card, index) => {
+                    // Calculate center position of the current card relative to the slider's viewport center
+                    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                    const sliderCenter = scrollLeft + sliderWidth / 2;
+                    
+                    const diff = Math.abs(cardCenter - sliderCenter);
+
+                    // Find the card closest to the center of the viewport
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        activeIndex = index;
+                    }
+                });
+
+                // Update dot classes
+                dotButtons.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.remove(...inactiveDotClass.split(' '));
+                        dot.classList.add(activeDotClass);
+                    } else {
+                        dot.classList.remove(activeDotClass);
+                        dot.classList.add(...inactiveDotClass.split(' '));
+                    }
+                });
+            };
+
+            // Attach event listeners and run initial check
+            slider.addEventListener('scroll', updateDots);
+            updateDots(); // Initial call to set the first dot active
+        };
+
+        // --- New JavaScript for Image Carousel Horizontal Scroll and Dots ---
+        const initImageCarousel = () => {
+            const slider = document.getElementById('image-slider');
+            const dotsContainer = document.getElementById('image-dots');
+            
+            const cards = slider ? slider.querySelectorAll('.flex-shrink-0') : []; 
+            if (!slider || !dotsContainer || cards.length === 0) return;
+
+            const dotButtons = dotsContainer.querySelectorAll('.dot-image');
+            const activeDotClass = 'bg-blue-600';
+            const inactiveDotClass = 'bg-gray-700 hover:bg-gray-600';
+
+            // 1. Dot Navigation (Clicking dot scrolls to card)
+            dotButtons.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-card-index'));
+                    const card = cards[index];
+
+                    if (card) {
+                        // Calculate position to center the card in the slider's view
+                        const offset = card.offsetLeft - (slider.offsetWidth - card.offsetWidth) / 2;
+                        
+                        slider.scrollTo({
+                            left: offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 2. Scroll Tracking (Updates dots on scroll)
+            const updateDots = () => {
+                const scrollLeft = slider.scrollLeft;
+                const sliderWidth = slider.offsetWidth;
+                
+                let activeIndex = 0;
+                let minDiff = Infinity;
+
+                cards.forEach((card, index) => {
+                    // Calculate center position of the current card relative to the slider's viewport center
+                    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                    const sliderCenter = scrollLeft + sliderWidth / 2;
+                    
+                    const diff = Math.abs(cardCenter - sliderCenter);
+
+                    // Find the card closest to the center of the viewport
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        activeIndex = index;
+                    }
+                });
+
+                // Update dot classes
+                dotButtons.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.remove(...inactiveDotClass.split(' '));
+                        dot.classList.add(activeDotClass);
+                    } else {
+                        dot.classList.remove(activeDotClass);
+                        dot.classList.add(...inactiveDotClass.split(' '));
+                    }
+                });
+            };
+
+            // Attach event listeners and run initial check
+            slider.addEventListener('scroll', updateDots);
+            updateDots(); // Initial call to set the first dot active
+        };
+
+        // --- Blog Content Loading Simulation (Replaced API calls with static data) ---
+        const blogTopics = [
+            { 
+                id: 'blog-post-social', 
+                content: "Social platforms are no longer just channels for conversation; they are sophisticated marketplaces. A robust strategy in 2025 focuses on integrated data analytics and conversion-centric campaigns, ensuring every interaction directly contributes to measurable ROI and brand loyalty."
+            },
+            { 
+                id: 'blog-post-seo', 
+                content: "Achieving digital authority requires mastering technical foundations: Core Web Vitals, mobile-first indexing, and semantic structure. These factors guarantee fast, accessible experiences that search engines prioritize for organic traffic growth."
+            },
+            { 
+                id: 'blog-post-content-creation', 
+                content: "In a saturated feed, visual excellence is the key differentiator. High-quality design and captivating video content immediately build trust and communicate value, drastically improving engagement and driving higher conversion rates."
+            }
+        ];
+
+        const loadStaticBlogPost = (topic) => {
+            const card = document.getElementById(topic.id);
+            const container = card.querySelector('.loading-text');
+
+            // Simulate loading time for a smoother transition
+            setTimeout(() => {
+                container.innerHTML = `<p class="text-sm">${topic.content}</p>`;
+            }, 750); 
+        };
+
+        const loadAllBlogContent = () => {
+            blogTopics.forEach(loadStaticBlogPost);
+        };
+
+        // Start loading blog content and carousels when the page loads
+        window.onload = () => {
+            loadAllBlogContent();
+            initServiceScroll(); 
+            initImageCarousel();
+        };
+    </script>
 </body>
 </html>
+
 
 
 
